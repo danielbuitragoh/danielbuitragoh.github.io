@@ -1,0 +1,109 @@
+# Vigilante del portafolio
+#
+# Vive en el repositorio del SITIO, junto a index.html. Hace dos cosas:
+#
+#   1. Comprueba a diario que cada demo del portafolio responde, y falla
+#      (con correo de GitHub) si alguna se cayó.
+#   2. Escribe estado.json al lado de index.html, que es lo que lee el sello
+#      de la portada. Si este workflow no ha corrido, no hay estado.json y el
+#      sello no aparece: la página no afirma nada que no se haya comprobado.
+#
+# De paso, la petición diaria mantiene despierto lo que se dormiría solo:
+#   · Supabase (gratis) pausa el proyecto tras ~1 semana sin actividad
+#   · Render (gratis) apaga el servicio tras 15 min y tarda 30-60s en volver
+#
+# Trampa de los 60 días: en repos públicos GitHub desactiva los workflows
+# programados —sin avisar— si el repo pasa 60 días sin actividad. Como este
+# commitea estado.json a diario, el propio repo se mantiene activo solo.
+
+name: Vigilante del portafolio
+
+on:
+  schedule:
+    - cron: '0 13 * * *'   # 13:00 UTC = 8:00 Colombia · 15:00 España
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write          # necesario para commitear estado.json
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Comprobar las demos y escribir estado.json
+        shell: bash
+        run: |
+          # Cada URL que enseñas en el CV, en LinkedIn o en el sitio.
+          URLS=(
+            "https://danielbuitragoh.github.io/flowyn-fae-skin/"
+            "https://danielbuitragoh.github.io/la-mesa/panel/panel-admin.html"
+            # "https://danielbuitragoh.github.io/dashboard-divisas/"
+            # "https://api-postulaciones.onrender.com/salud"
+          )
+
+          total=${#URLS[@]}
+          en_linea=0
+          detalle=""
+
+          for url in "${URLS[@]}"; do
+            # Dos intentos: el primero puede estar despertando un servicio
+            # dormido de Render, que tarda 30-60s. De ahí el timeout largo.
+            codigo=""
+            for intento in 1 2; do
+              # Ojo: si curl falla del todo igualmente escribe "000" por -w.
+              # Por eso el fallback ASIGNA la variable en vez de hacer echo,
+              # que concatenaría y daría "000000".
+              codigo=$(curl -s -o /dev/null -w "%{http_code}" \
+                            --max-time 90 --retry 0 "$url") || codigo="000"
+              [[ "$codigo" =~ ^(200|301|302)$ ]] && break
+              [[ $intento -eq 1 ]] && sleep 15
+            done
+
+            if [[ "$codigo" =~ ^(200|301|302)$ ]]; then
+              echo "OK    $codigo  $url"
+              en_linea=$((en_linea+1))
+              estado="en linea"
+            else
+              echo "CAIDA $codigo  $url"
+              estado="caida"
+            fi
+
+            [[ -n "$detalle" ]] && detalle="$detalle,"
+            detalle="$detalle{\"url\":\"$url\",\"estado\":\"$estado\",\"codigo\":\"$codigo\"}"
+          done
+
+          cat > estado.json <<JSON
+          {
+            "comprobado": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "total": $total,
+            "enLinea": $en_linea,
+            "enlaces": [$detalle]
+          }
+          JSON
+
+          echo
+          cat estado.json
+
+          # Guardar el resultado para el paso siguiente
+          echo "fallos=$((total - en_linea))" >> "$GITHUB_ENV"
+
+      - name: Publicar estado.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add estado.json
+          # Sin cambios (mismo minuto, mismo estado) no hay nada que commitear.
+          git diff --staged --quiet || git commit -m "Estado del portafolio [skip ci]"
+          git push
+
+      - name: Fallar si alguna demo está caída
+        if: env.fallos != '0'
+        run: |
+          echo "$fallos demo(s) no responden."
+          echo "Si es una de Supabase: el proyecto pudo pausarse por"
+          echo "inactividad — se reactiva desde el panel de Supabase."
+          exit 1
