@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daniel Buitrago · Desarrollador</title>
+<meta name="description" content="Seis sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
+<link rel="canonical" href="https://danielbuitragoh.github.io/" />
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://danielbuitragoh.github.io/" />
+<meta property="og:title" content="Daniel Buitrago · Desarrollador" />
+<meta property="og:description" content="Seis sistemas completos, 105 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
+<meta property="og:image" content="https://danielbuitragoh.github.io/capturas/tarjeta.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='32' y='44' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EDB%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===================================================================
+   Daniel Buitrago · portafolio
+
+   Blanco y negro, con las secciones alternando en positivo y negativo.
+   El color entra en dos sitios y solo en dos: las capturas —que son el
+   trabajo— y el acento, que marca EXCLUSIVAMENTE lo que se puede pulsar
+   o lo que es un dato duro. Si el acento apareciera también en adornos,
+   dejaría de significar "aquí hay algo".
+
+   Los grises tienen dos juegos de valores, uno por fondo. Un solo gris
+   no puede servir sobre papel y sobre tinta: el que se lee bien en negro
+   se queda en 2,5:1 sobre blanco y deja de cumplir WCAG AA. Las
+   secciones en negativo redefinen los tokens, así que cada componente
+   hereda el valor correcto sin saber sobre qué fondo está.
+   =================================================================== */
+
+:root{
+  color-scheme:light;
+
+  --papel:#ffffff;
+  --papel-2:#f6f6f4;
+  --tinta:#0a0a0a;
+
+  /* Grises sobre PAPEL. Medidos: 5,33:1 y 4,56:1 sobre blanco. */
+  --gris-1:#6b6b6b;
+  --gris-2:#77766f;
+  /* Grises sobre TINTA (los aplica .negativo). 9,98:1 y 7,85:1. */
+  --gris-1-neg:#b8b8b8;
+  --gris-2-neg:#a3a3a3;
+
+  --linea:#e4e4e4;
+  --linea-neg:#2a2a2a;
+  --tinta-neg:#d4d4d4;
+  --tinta-neg-fuerte:#ffffff;
+
+  /* La página es blanco y negro. El "acento" es tinta: existe como token
+     para que un componente no tenga que saber sobre qué fondo está.
+     Sobre fondo negativo NO vale --papel: en modo oscuro --papel es casi
+     negro y las cifras de la portada se volvían ilegibles sobre el negro
+     de la sección. Va a un blanco explícito, el mismo del énfasis. */
+  --acento:var(--tinta);
+  --acento-neg:var(--tinta-neg-fuerte);
+
+  /* El ÚNICO color del cromo: los glifos del stack, y llevan color porque
+     codifican la capa (lenguaje, servidor, datos, interfaz, calidad), no
+     por decorar. Son los cinco tonos que ya validé para el panel de
+     divisas: separables bajo daltonismo y con contraste medido en los dos
+     modos. Los logotipos de marca no se usan — son marcas registradas, y
+     siete azules corporativos distintos destrozarían la página. */
+  --capa-lenguaje:#2a78d6;
+  --capa-servidor:#1baf7a;
+  --capa-datos:#c07800;
+  --capa-interfaz:#d94f8a;
+  --capa-calidad:#d1601f;
+
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --texto:"Instrument Sans",system-ui,sans-serif;
+  --dato:"JetBrains Mono",ui-monospace,monospace;
+  --margen:clamp(20px,6vw,110px);
+  --curva:cubic-bezier(.22,1,.36,1);
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --papel:#0c0c0c;
+    --papel-2:#151514;
+    --tinta:#fbfbfa;
+    --gris-1:#9b9a95;
+    --gris-2:#8a8983;
+    --gris-1-neg:#a9a8a1;
+    --gris-2-neg:#8f8e88;
+    --linea:#242423;
+    --linea-neg:#333331;
+    --tinta-neg:#c9c8c2;
+    --tinta-neg-fuerte:#fbfbfa;
+    --acento:var(--tinta);
+    --acento-neg:var(--tinta-neg-fuerte);
+    --capa-lenguaje:#3987e5;
+    --capa-servidor:#199e70;
+    --capa-datos:#c98500;
+    --capa-interfaz:#e0729f;
+    --capa-calidad:#e0703a;
+  }
+  :root:not([data-theme="light"]) .negativo{background:#1c1c1a;color:var(--tinta)}
+  :root:not([data-theme="light"]) .lamina img{border-color:var(--linea)}
+}
+/* Repetido para la elección explícita del visor: un color definido solo
+   dentro de una media query no se aplica cuando alguien estampa el tema
+   a mano, y la página saldría con el texto de un tema sobre el fondo del otro. */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --papel:#0c0c0c;
+  --papel-2:#151514;
+  --tinta:#fbfbfa;
+  --gris-1:#9b9a95;
+  --gris-2:#8a8983;
+  --gris-1-neg:#a9a8a1;
+  --gris-2-neg:#8f8e88;
+  --linea:#242423;
+  --linea-neg:#333331;
+  --tinta-neg:#c9c8c2;
+  --tinta-neg-fuerte:#fbfbfa;
+  --acento:var(--tinta);
+  --acento-neg:var(--tinta-neg-fuerte);
+  --capa-lenguaje:#3987e5;
+  --capa-servidor:#199e70;
+  --capa-datos:#c98500;
+  --capa-interfaz:#e0729f;
+  --capa-calidad:#e0703a;
+}
+:root[data-theme="dark"] .negativo{background:#1c1c1a;color:var(--tinta)}
+:root[data-theme="dark"] .lamina img{border-color:var(--linea)}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+/* Sin esto, saltar a una sección la deja medio tapada por la barra fija:
+   el ancla lleva el borde superior de la sección justo al borde de la
+   ventana, donde está la barra. */
+#quien,#trabajo,#metodo,#contacto{scroll-margin-top:72px}
+body{
+  background:var(--papel);color:var(--tinta);
+  font-family:var(--texto);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acento);outline-offset:4px;border-radius:2px}
+.solo-lectores{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Las secciones en negativo cambian los TOKENS, no cada regla. Así un
+   componente nuevo hereda los grises correctos sin tener que acordarse. */
+.negativo{
+  background:var(--tinta);color:var(--papel);
+  --gris-1:var(--gris-1-neg);
+  --gris-2:var(--gris-2-neg);
+  --acento:var(--acento-neg);
+  --linea:var(--linea-neg);
+}
+
+/* ---------- portada ---------- */
+/* Se dimensiona por lo que contiene, no por la pantalla: una portada de
+   100vh empuja el resto fuera del primer vistazo y quien abre el enlace
+   no sabe que hay trabajo debajo. */
+.portada{
+  padding-block:clamp(26px,6vh,58px) clamp(26px,5vh,48px);
+  padding-inline:var(--margen);
+  display:flex;flex-direction:column;gap:clamp(32px,7vh,72px);
+}
+.membrete{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  font-family:var(--dato);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);
+}
+.membrete .disponible{color:var(--acento);display:inline-flex;align-items:center;gap:7px}
+.pulso{
+  width:7px;height:7px;border-radius:50%;background:currentColor;flex:none;
+  animation:latir 3.4s var(--curva) infinite;
+}
+@keyframes latir{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+.tesis{
+  font-family:var(--display);
+  font-size:clamp(2.4rem,7.6vw,6.6rem);
+  font-weight:800;line-height:.95;letter-spacing:-.035em;
+  max-width:16ch;text-wrap:balance;
+}
+.tesis em{font-style:normal;color:var(--gris-2)}
+
+.pie-portada{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:36px;flex-wrap:wrap;
+  border-top:1px solid var(--linea);padding-top:24px;
+}
+.presentacion{max-width:50ch;color:var(--tinta-neg);font-size:16px}
+/* El énfasis lleva su propio token: en modo oscuro --papel es casi negro,
+   y usarlo aquí hacía desaparecer la frase justo donde más importa. */
+.presentacion strong{color:var(--tinta-neg-fuerte);font-weight:500}
+
+/* Las cifras. Son lo primero que escanea quien lee rápido, así que van
+   arriba y en el acento — y son comprobables una por una más abajo. */
+.cifras{display:flex;gap:clamp(22px,4vw,54px);flex-wrap:wrap}
+.cifra b{
+  display:block;font-family:var(--display);font-weight:800;
+  font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1;letter-spacing:-.03em;
+  color:var(--acento);font-variant-numeric:tabular-nums;
+}
+.cifra span{
+  display:block;margin-top:6px;font-family:var(--dato);font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gris-2);
+}
+
+/* ---------- banda de stack ---------- */
+.stack{
+  padding:22px var(--margen);border-bottom:1px solid var(--linea);
+  display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);flex-wrap:wrap;
+}
+.stack .titulo{
+  font-family:var(--dato);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gris-2);
+}
+.stack ul{list-style:none;display:flex;gap:clamp(10px,1.6vw,20px);flex-wrap:wrap}
+.stack li{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+/* Glifos dibujados a mano y genéricos a propósito: los logotipos de las
+   marcas son marcas registradas, y además siete azules corporativos
+   distintos arruinarían una página que es blanca y negra por decisión. */
+.stack svg{width:17px;height:17px;flex:none}
+.stack .lenguaje svg{color:var(--capa-lenguaje)}
+.stack .servidor svg{color:var(--capa-servidor)}
+.stack .datos    svg{color:var(--capa-datos)}
+.stack .interfaz svg{color:var(--capa-interfaz)}
+.stack .calidad  svg{color:var(--capa-calidad)}
+.stack .pie{
+  font-family:var(--dato);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gris-2);margin-left:auto;
+}
+
+/* ---------- rótulos de sección ---------- */
+.rotulo{
+  font-family:var(--dato);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gris-2);padding-bottom:16px;border-bottom:1px solid currentColor;
+  display:flex;justify-content:space-between;gap:16px;
+}
+
+/* ---------- quién soy ---------- */
+.quien{padding:clamp(64px,11vh,130px) var(--margen) clamp(48px,7vh,86px)}
+.quien h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.03;text-wrap:balance;
+  max-width:20ch;margin:36px 0 32px;
+}
+.quien h2 em{font-style:normal;color:var(--gris-2)}
+.relato{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:clamp(22px,3.5vw,48px);max-width:1060px}
+.relato p{font-size:16.5px}
+.relato strong{font-weight:500}
+
+/* Rejilla de filete: el hueco de 1px deja ver el fondo de la lista y hace
+   de línea divisoria. Con `auto-fit` y bordes por elemento, seis fichas
+   caían 5 + 1 y la última quedaba huérfana con media línea debajo; un
+   número de columnas fijo que divide a seis siempre cierra las filas. */
+.ficha{
+  list-style:none;margin-top:clamp(40px,6vh,72px);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--linea);
+  border:1px solid var(--linea);border-radius:10px;overflow:hidden;
+}
+.ficha li{background:var(--papel);padding:15px 18px}
+@media (max-width:860px){ .ficha{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:520px){ .ficha{grid-template-columns:1fr} }
+.ficha .clave{
+  font-family:var(--dato);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gris-2);display:block;margin-bottom:5px;
+}
+.ficha .valor{font-size:15.5px;font-weight:500}
+.ficha .valor.destaca{font-weight:600;font-size:16.5px}
+
+/* ---------- trabajo ---------- */
+.trabajo{padding:clamp(48px,7vh,86px) var(--margen) 0}
+
+.pieza{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(26px,4.5vw,72px);
+  align-items:center;padding:clamp(46px,8vh,92px) 0;border-bottom:1px solid var(--linea);
+}
+/* La alternancia se declara pieza a pieza: con nth-child dependería de
+   cuántos elementos no-pieza haya antes y se rompe al insertar algo. */
+.pieza--invertida .lamina{order:-1}
+
+.marca{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.numero{font-family:var(--dato);font-size:11px;letter-spacing:.16em;color:var(--gris-2)}
+.insignia{
+  font-family:var(--dato);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--acento);border:1px solid currentColor;border-radius:999px;padding:3px 9px;
+}
+.titular{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(1.8rem,4.2vw,3rem);line-height:1.03;letter-spacing:-.025em;margin-bottom:7px;
+  text-wrap:balance;
+}
+.subtitular{color:var(--gris-1);font-size:16px;margin-bottom:24px;max-width:42ch}
+
+.decision{
+  border-left:2px solid var(--acento);padding:2px 0 2px 20px;
+  margin-bottom:24px;max-width:48ch;
+}
+.decision p{font-size:15.5px;line-height:1.62}
+.decision p + p{margin-top:12px}
+.decision .etiqueta{
+  display:block;font-family:var(--dato);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--acento);margin-bottom:8px;
+}
+.decision code{font-family:var(--dato);font-size:13.5px;background:var(--papel-2);padding:1px 5px;border-radius:4px}
+
+.herramientas{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px;list-style:none}
+.herramientas li{
+  font-family:var(--dato);font-size:11px;border:1px solid var(--linea);
+  border-radius:999px;padding:5px 11px;color:var(--gris-1);
+}
+.enlaces{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.boton{
+  font-size:14px;font-weight:500;text-decoration:none;
+  border:1px solid var(--tinta);background:var(--tinta);color:var(--papel);
+  border-radius:999px;padding:10px 20px;display:inline-flex;align-items:center;gap:8px;
+  transition:filter .2s var(--curva),transform .2s var(--curva);
+}
+.boton:hover{opacity:.84;transform:translateY(-1px)}
+.boton svg{width:13px;height:13px}
+.boton--tenue{background:transparent;color:var(--tinta);border-color:var(--linea)}
+.boton--tenue:hover{border-color:var(--tinta);opacity:1}
+
+.lamina{margin:0}
+.lamina img{width:100%;height:auto;display:block;border:1px solid var(--linea)}
+.lamina figcaption{
+  font-family:var(--dato);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gris-2);margin-top:11px;display:flex;justify-content:space-between;gap:12px;
+}
+
+/* La consola: la "captura" de lo que no tiene pantalla. Un backend no se
+   enseña con una foto de un endpoint, se enseña con lo que imprime. */
+.consola{
+  background:#0a0a0a;color:#e8e8e6;border-radius:10px;padding:20px 22px;
+  font-family:var(--dato);font-size:12.5px;line-height:1.85;overflow-x:auto;
+}
+.consola .prompt{color:#a3a3a3}
+.consola .ok{color:#4ade80}
+.consola .tenue{color:#a3a3a3}
+.consola b{font-weight:500;color:#fff}
+
+/* ---------- cómo trabajo ---------- */
+.metodo{padding:clamp(64px,11vh,130px) var(--margen)}
+.metodo h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(1.8rem,4.6vw,3.2rem);line-height:1.03;max-width:22ch;margin:36px 0 8px;
+  text-wrap:balance;
+}
+.metodo .entradilla{color:var(--tinta-neg);max-width:58ch;margin-bottom:clamp(34px,5vh,58px)}
+.principios{list-style:none;display:grid;border-top:1px solid var(--linea)}
+.principios li{
+  display:grid;grid-template-columns:minmax(220px,.85fr) 1.15fr;gap:clamp(18px,3vw,54px);
+  padding:26px 0;border-bottom:1px solid var(--linea);align-items:start;
+}
+.principios h3{font-family:var(--display);font-weight:600;font-size:1.22rem;letter-spacing:-.015em;line-height:1.16}
+.principios p{color:var(--tinta-neg);font-size:15.5px}
+.principios .donde{
+  display:block;font-family:var(--dato);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acento);margin-top:9px;
+}
+
+/* ---------- cierre ---------- */
+.cierre{padding:clamp(58px,10vh,120px) var(--margen)}
+.cierre h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(2rem,5.6vw,4rem);line-height:1;max-width:17ch;margin:36px 0 16px;
+  text-wrap:balance;
+}
+.cierre .aclaracion{color:var(--gris-1);max-width:52ch;margin-bottom:32px}
+.contacto{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:52px}
+.contacto a{
+  border:1px solid var(--linea);border-radius:999px;padding:11px 22px;
+  text-decoration:none;font-size:15px;
+  transition:border-color .2s var(--curva),color .2s var(--curva);
+}
+.contacto a:hover{border-color:var(--tinta);color:var(--tinta)}
+.contacto a.principal{background:var(--tinta);border-color:var(--tinta);color:var(--papel);font-weight:500}
+.contacto a.principal:hover{opacity:.84;color:var(--papel);border-color:var(--tinta)}
+.colofon{
+  border-top:1px solid var(--linea);padding-top:20px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-family:var(--dato);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2);
+}
+
+
+/* ---------- barra de navegación ---------- */
+/* Aparece al pasar la portada, no antes: en la primera pantalla no hay nada
+   que navegar y una barra ahí solo roba sitio al titular. El subrayado sigue
+   a la sección visible con un IntersectionObserver, así que dice dónde estás
+   sin que tengas que adivinarlo. */
+.saltar{
+  position:absolute;left:var(--margen);top:8px;z-index:60;
+  background:var(--tinta);color:var(--papel);padding:9px 16px;border-radius:999px;
+  font-size:13px;text-decoration:none;transform:translateY(-200%);
+  transition:transform .2s var(--curva);
+}
+.saltar:focus-visible{transform:translateY(0)}
+
+.barra{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;gap:18px;
+  padding:10px var(--margen);
+  padding-top:calc(10px + env(safe-area-inset-top, 0px));
+  background:color-mix(in srgb, var(--papel) 88%, transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--linea);
+  transform:translateY(-105%);
+  transition:transform .32s var(--curva);
+}
+.barra.visible{transform:translateY(0)}
+.barra .firma{font-weight:600;letter-spacing:-.01em;font-size:15px;white-space:nowrap}
+.barra nav{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.barra nav::-webkit-scrollbar{display:none}
+.barra nav a{
+  position:relative;text-decoration:none;font-size:14px;color:var(--gris-1);
+  padding:7px 12px;border-radius:8px;white-space:nowrap;
+  transition:color .2s var(--curva);
+}
+.barra nav a:hover{color:var(--tinta)}
+.barra nav a[aria-current="true"]{color:var(--tinta);font-weight:500}
+/* El subrayado es un pseudo-elemento que crece desde el centro: una sola
+   propiedad animada (transform) y ningún reflujo. */
+.barra nav a::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;
+  background:var(--tinta);border-radius:2px;
+  transform:scaleX(0);transform-origin:center;
+  transition:transform .28s var(--curva);
+}
+.barra nav a[aria-current="true"]::after{transform:scaleX(1)}
+
+.tema{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--linea);background:transparent;color:var(--tinta);
+  transition:border-color .2s var(--curva);
+}
+.tema:hover{border-color:var(--tinta)}
+.tema svg{width:17px;height:17px}
+.tema .luna{display:none}
+:root[data-theme="dark"] .tema .sol,
+:root:not([data-theme="light"]) .tema .sol{display:none}
+:root[data-theme="dark"] .tema .luna,
+:root:not([data-theme="light"]) .tema .luna{display:block}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .tema .sol{display:block}
+  :root:not([data-theme="dark"]) .tema .luna{display:none}
+}
+@media (max-width:700px){
+  .barra .firma{display:none}
+  .barra nav{margin-left:0}
+}
+
+/* ---------- botones de contacto con icono ---------- */
+.contacto a{
+  display:inline-flex;align-items:center;gap:9px;
+}
+.contacto svg{width:16px;height:16px;flex:none}
+
+/* ---------- aparición ---------- */
+/* El estado de reposo de todo lo legible es VISIBLE. Solo se oculta, desde
+   JavaScript, lo que al cargar ya queda por debajo de la pantalla: si el
+   observador no llega a correr, la página se lee entera igual. Aparcar
+   secciones en opacity:0 desde el CSS es cómo un enlace compartido acaba
+   enseñando una página en blanco. */
+.surge.pendiente{opacity:0;transform:translateY(20px)}
+.surge.entra{animation:surgir .8s var(--curva) both}
+@keyframes surgir{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.portada .tesis,.portada .pie-portada{animation:surgir .9s var(--curva) both}
+.portada .pie-portada{animation-delay:.14s}
+
+@media (max-width:880px){
+  .pieza{grid-template-columns:1fr;gap:28px}
+  .pieza--invertida .lamina{order:0}
+  .pie-portada{flex-direction:column;align-items:flex-start;gap:26px}
+  .principios li{grid-template-columns:1fr;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .surge,.surge.pendiente{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<a class="saltar" href="#trabajo">Saltar al trabajo</a>
+
+<div class="barra" id="barra" hidden>
+  <span class="firma">Daniel Buitrago</span>
+  <nav aria-label="Secciones de la página">
+    <a href="#quien">Quién soy</a>
+    <a href="#trabajo">Trabajo</a>
+    <a href="#metodo">Cómo trabajo</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <button class="tema" id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">
+    <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+    <svg class="luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+  </button>
+</div>
+
+<header class="portada negativo">
+  <div class="membrete">
+    <span>Daniel Buitrago · Desarrollador</span>
+    <span class="disponible"><span class="pulso" aria-hidden="true"></span>Disponible para entrevistas</span>
+  </div>
+
+  <h1 class="tesis">Construyo, pruebo y despliego. <em>Y respondo por cada decisión.</em></h1>
+
+  <div class="pie-portada">
+    <p class="presentacion">
+      Desarrollador en Madrid. Seis sistemas completos —modelo de datos, permisos,
+      API, interfaz, integración continua y despliegue—, con pruebas que corren
+      solas en cada cambio y cada decisión técnica documentada.
+      <strong>Todo lo que hay aquí se puede abrir, leer y discutir.</strong>
+    </p>
+
+    <div class="cifras">
+      <p class="cifra"><b>6</b><span>proyectos terminados</span></p>
+      <p class="cifra"><b>105</b><span>pruebas automáticas</span></p>
+      <p class="cifra"><b>2</b><span>demos que puedes tocar</span></p>
+    </div>
+  </div>
+</header>
+
+<section class="stack" aria-label="Tecnologías con las que trabajo">
+  <span class="titulo">Trabajo con</span>
+  <ul>
+    <li class="lenguaje">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"/></svg>
+      TypeScript
+    </li>
+    <li class="servidor">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      Node
+    </li>
+    <li class="servidor">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7.5 9.5h4"/><path d="M7.5 13h9"/><path d="M7.5 16.5h6"/></svg>
+      Express
+    </li>
+    <li class="datos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+      PostgreSQL
+    </li>
+    <li class="interfaz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8.5h6"/></svg>
+      React
+    </li>
+    <li class="calidad">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      Vitest
+    </li>
+    <li class="calidad">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="12" r="2.6"/><path d="M6 8.6v6.8"/><path d="M8.5 6h4.2a2.8 2.8 0 0 1 2.8 2.8v.8"/></svg>
+      Git · CI
+    </li>
+  </ul>
+  <!-- El color de cada glifo dice de qué capa es la pieza; es el único
+       color del cromo y significa algo. -->
+  <span class="pie">Color por capa</span>
+</section>
+
+<!-- ================= QUIÉN SOY ================= -->
+<section id="quien" class="quien surge" aria-labelledby="t-quien">
+  <div class="rotulo"><span>Quién soy</span><span>Madrid</span></div>
+
+  <h2 id="t-quien">Mi experiencia no está en un contrato. <em>Está desplegada.</em></h2>
+
+  <div class="relato">
+    <div>
+      <p>
+        Llevo año y medio sosteniendo tres cosas a la vez: un empleo a jornada
+        completa, la carrera de Ingeniería de Sistemas y este portafolio.
+        <strong>Ninguna de las tres ha bajado de nivel</strong>, y lo que hay aquí
+        abajo lo demuestra: seis sistemas terminados, no seis experimentos.
+      </p>
+    </div>
+    <div>
+      <p>
+        Aprendí construyendo cosas que alguien iba a usar y sosteniéndolas cuando
+        se rompían. Por eso llego sabiendo desplegar, no solo programar: estos
+        proyectos tienen base de datos, permisos, integración continua y pruebas
+        que fallan solas cuando alguien rompe algo — incluido yo.
+      </p>
+    </div>
+    <div>
+      <p>
+        Cada proyecto lleva <strong>una decisión</strong> contada: el momento con
+        dos caminos y por qué elegí uno. Pregúntame por cualquiera y tengo la
+        respuesta, el commit que la respalda y la alternativa que descarté.
+      </p>
+    </div>
+  </div>
+
+  <ul class="ficha">
+    <li><span class="clave">Busco</span><span class="valor destaca">Backend o full stack junior</span></li>
+    <li><span class="clave">Dónde</span><span class="valor">Madrid · híbrido o remoto</span></li>
+    <li><span class="clave">Permiso de trabajo</span><span class="valor">Sí, en vigor</span></li>
+    <li><span class="clave">Incorporación</span><span class="valor">Enero de 2027</span></li>
+    <li><span class="clave">Formación</span><span class="valor">Ing. de Sistemas · 5º de 10</span></li>
+    <li><span class="clave">Inglés</span><span class="valor">B2</span></li>
+  </ul>
+</section>
+
+<!-- ================= TRABAJO ================= -->
+<main id="trabajo" class="trabajo" aria-label="Proyectos">
+  <div class="rotulo"><span>Trabajo</span><span>Seis proyectos terminados</span></div>
+
+  <!-- 01 -->
+  <article class="pieza pieza--invertida surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">01</span><span class="insignia">En línea</span></p>
+      <h2 class="titular">flowyn · FAE SKIN</h2>
+      <p class="subtitular">
+        Tienda completa de un producto: catálogo, cuenta, carrito sincronizado
+        entre dispositivos y cierre de pedido, con el precio recalculado siempre
+        en el servidor.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          La clienta no puede crear pedidos, y esa es la parte importante del
+          esquema. Un pedido nace en una función de servidor que recalcula el
+          total desde el catálogo; si el navegador pudiera escribir en esa tabla,
+          cualquiera con la consola abierta se registraría un frasco por mil pesos.
+        </p>
+        <p>
+          La pasarela de pagos la descarté a mitad: simular un cobro me parecía
+          peor que no tenerlo. Prefiero un no honesto a un sí simulado.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>Vite</li><li>JavaScript</li><li>Supabase</li><li>PostgreSQL · RLS</li><li>WCAG AA</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton" href="https://danielbuitragoh.github.io/flowyn-fae-skin/">
+          Abrir la tienda
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/flowyn-fae-skin">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <img src="capturas/flowyn-1.webp" width="1100" height="686" loading="lazy" decoding="async"
+           alt="Portada de flowyn: el frasco de FAE SKIN sobre fondo claro con el precio y el botón de descubrir." />
+      <figcaption><span>Portada</span><span>17 de 17 pares de color pasan AA</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 02 -->
+  <article class="pieza surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">02</span><span class="insignia">En línea</span></p>
+      <h2 class="titular">La Mesa</h2>
+      <p class="subtitular">
+        Sistema completo de pedidos para un restaurante: app móvil, panel de
+        cocina y backend, con los permisos aplicados en la base de datos y no en
+        la interfaz.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          Los disparadores de negocio corrían con los permisos de quien lanzaba la
+          actualización: cuando cocina marcaba un pedido como entregado, la
+          seguridad a nivel de fila rechazaba el registro de puntos y el cambio de
+          estado entero fallaba <em>en silencio</em>. Pasarlos a
+          <code>security definer</code> lo resolvió.
+        </p>
+        <p>
+          Me dejó una regla que aplico desde entonces: los permisos se prueban
+          suplantando a cada rol, nunca desde la cuenta de administrador — ahí
+          todo funciona siempre.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>React Native</li><li>Expo</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL · RLS</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton" href="https://danielbuitragoh.github.io/la-mesa/panel/panel-admin.html">
+          Abrir el panel de cocina
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/la-mesa">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <img src="capturas/la-mesa.webp" width="1100" height="688" loading="lazy" decoding="async"
+           alt="Panel de cocina de La Mesa: los pedidos del día repartidos en cuatro columnas — recibidos, en preparación, listos y entregados — con su importe y su forma de pago." />
+      <figcaption><span>Panel de cocina</span><span>Datos reales, en vivo</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 03 -->
+  <article class="pieza pieza--invertida surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">03</span><span class="insignia">59 pruebas</span></p>
+      <h2 class="titular">frankfurter-ts</h2>
+      <p class="subtitular">
+        Cliente de tipos de cambio para npm: caché que respeta el
+        <code>Cache-Control</code> del servidor, reintentos con espera creciente y
+        aritmética exacta.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          <code>0.1 + 0.2</code> no da <code>0.3</code> en ningún lenguaje con coma
+          flotante. En un ejercicio da igual; cuando el número es el dinero de
+          alguien, no. Los importes se guardan como enteros en unidades mínimas
+          con <code>BigInt</code> y solo se redondea una vez, al final y de forma
+          explícita.
+        </p>
+        <p>
+          Es más trabajo y no se ve desde fuera — hasta que las cuentas cuadran al
+          céntimo.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>TypeScript</li><li>BigInt</li><li>Vitest</li><li>npm</li><li>CLI</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/frankfurter-ts">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <div class="consola">
+        <span class="prompt">$</span> npx fx 100 EUR COP<br>
+        <b>358.893 COP</b> <span class="tenue">· 1 EUR = 3588,93 COP · 2026-09-16</span><br><br>
+        <span class="prompt">$</span> npm test<br>
+        <span class="tenue">Test Files</span>  <span class="ok">3 passed (3)</span><br>
+        <span class="tenue">     Tests</span>  <span class="ok">59 passed (59)</span>
+      </div>
+      <figcaption><span>Salida real</span><span>59 pruebas en verde</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 04 -->
+  <article class="pieza surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">04</span><span class="insignia">Sin servidor</span></p>
+      <h2 class="titular">Panel de divisas</h2>
+      <p class="subtitular">
+        Cinco monedas latinoamericanas frente al euro con datos de 98 bancos
+        centrales. Abre al instante: no hay backend que despertar.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          Nunca dos ejes Y. El peso colombiano ronda 3.600 por euro y el dólar
+          1,15: juntarlos con dos escalas inventa una correlación que no está en
+          los datos. Van indexados a 100 sobre un solo eje, y la pregunta que
+          responde el gráfico pasa a ser la interesante.
+        </p>
+        <p>
+          Mi primera prueba concluyó que la API tenía CORS cerrado y casi cambio la
+          arquitectura por eso. Era un falso negativo: <code>fetch</code> desde
+          Node no manda cabecera <code>Origin</code>. Ahora mido dos veces antes de
+          decidir.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>React</li><li>TypeScript</li><li>Recharts</li><li>Vite</li><li>Daltonismo verificado</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/panel-divisas">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <img src="capturas/panel.webp" width="1100" height="816" loading="lazy" decoding="async"
+           alt="Panel de divisas: tarjetas con la variación de cada moneda y un gráfico de líneas con todas indexadas a base 100." />
+      <figcaption><span>Comparador indexado</span><span>98 bancos centrales</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 05 -->
+  <article class="pieza pieza--invertida surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">05</span><span class="insignia">46 pruebas</span></p>
+      <h2 class="titular">API de postulaciones</h2>
+      <p class="subtitular">
+        API REST con autenticación real, historial completo de cada candidatura y
+        estadísticas de tiempo de respuesta.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          Lo fácil es una columna <code>estado</code> que se sobrescribe, y pierde
+          el historial: sin saber <em>cuándo</em> cambió no hay forma de responder
+          «cuánto tardan de media en contestarme». Cada cambio es un evento y el
+          estado actual es una consulta.
+        </p>
+        <p>
+          Para comprobar que las pruebas de permisos servían de algo, borré a
+          propósito el filtro de usuario de dos rutas: la batería se puso roja en
+          esas dos y solo en esas.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>Node</li><li>Express 5</li><li>PostgreSQL</li><li>Zod</li><li>Argon2id</li><li>Vitest</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/api-postulaciones">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <div class="consola">
+        <span class="prompt">$</span> npm test <span class="tenue">— contra PostgreSQL real, sin dobles</span><br><br>
+        <span class="ok">✓</span> no puede leer la postulación ajena<br>
+        <span class="ok">✓</span> no puede modificarla<br>
+        <span class="ok">✓</span> no puede borrarla<br>
+        <span class="ok">✓</span> no puede escribir en su historial<br>
+        <span class="ok">✓</span> no la ve en su listado ni en su recuento<br>
+        <span class="ok">✓</span> rechaza un token sin firma <span class="tenue">(alg: none)</span><br><br>
+        <span class="tenue">     Tests</span>  <span class="ok">46 passed (46)</span>
+      </div>
+      <figcaption><span>Pruebas de autorización</span><span>Salida real</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 06 -->
+  <article class="pieza surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">06</span><span class="insignia">Accesible con teclado</span></p>
+      <h2 class="titular">Gestor de candidaturas</h2>
+      <p class="subtitular">
+        El tablero que consume esa API: arrastrar y soltar, métricas y estados de
+        error diseñados.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          El arrastrar y soltar nativo de HTML no funciona con teclado, y mover una
+          tarjeta es <em>la</em> acción de esta pantalla. Usé una librería con
+          soporte de teclado y además cada tarjeta lleva un selector de estado:
+          arrastrar es la vía rápida, no la única.
+        </p>
+        <p>
+          Por dentro, el refresco del token es una sola promesa compartida. Sin
+          eso, tres peticiones caducadas a la vez lo rotan tres veces y expulsan al
+          usuario sin motivo.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>React 19</li><li>TypeScript</li><li>dnd-kit</li><li>Vite</li><li>Optimista con reversión</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/gestor-postulaciones">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <img src="capturas/gestor.webp" width="1100" height="348" loading="lazy" decoding="async"
+           alt="Tablero de candidaturas con cinco columnas: enviadas, contestaron, entrevista, oferta y cerradas." />
+      <figcaption><span>Tablero</span><span>Cinco fases</span></figcaption>
+    </figure>
+  </article>
+</main>
+
+<!-- ================= CÓMO TRABAJO ================= -->
+<section id="metodo" class="metodo negativo surge" aria-labelledby="t-metodo">
+  <div class="rotulo"><span>Cómo trabajo</span><span>Con ejemplos, no con adjetivos</span></div>
+
+  <h2 id="t-metodo">Cualquiera puede decir que es meticuloso.</h2>
+  <p class="entradilla">
+    Estas cuatro están en el código, se pueden abrir y se pueden comprobar. Es la
+    única forma de que signifiquen algo.
+  </p>
+
+  <ul class="principios">
+    <li>
+      <h3>Los permisos viven en la base de datos</h3>
+      <div>
+        <p>
+          No en un <code>if</code> de la interfaz, que cualquiera se salta con la
+          consola abierta. En La Mesa y en flowyn van con seguridad a nivel de fila,
+          y en la API el filtro de usuario va dentro del <code>WHERE</code>: la fila
+          que no es tuya no llega ni a salir de PostgreSQL. Además respondo 404 y no
+          403 cuando el recurso es de otro, porque un 403 confirmaría que existe.
+        </p>
+        <span class="donde">La Mesa · flowyn · API de postulaciones</span>
+      </div>
+    </li>
+    <li>
+      <h3>Pruebo contra la base de datos de verdad</h3>
+      <div>
+        <p>
+          <strong>105 pruebas automáticas</strong> que corren en cada cambio, contra
+          PostgreSQL real y sin dobles: las restricciones que protegen los datos viven
+          en la base, y un mock devuelve lo que yo le diga. Y para saber que las
+          pruebas sirven, las rompo a propósito y compruebo que se ponen rojas donde
+          deben.
+        </p>
+        <span class="donde">API de postulaciones · frankfurter-ts</span>
+      </div>
+    </li>
+    <li>
+      <h3>El camino que falla también está diseñado</h3>
+      <div>
+        <p>
+          Reintentos con espera creciente, datos en caché servidos y marcados cuando
+          la fuente no responde, pantallas de error con su botón de reintentar y
+          cambios optimistas que se deshacen solos si el servidor los rechaza. Lo que
+          hace que una aplicación se sienta sólida no es el camino bueno, es el otro.
+        </p>
+        <span class="donde">frankfurter-ts · Panel de divisas · Gestor</span>
+      </div>
+    </li>
+    <li>
+      <h3>La accesibilidad la mido, no la prometo</h3>
+      <div>
+        <p>
+          17 de 17 pares de color verificados contra WCAG AA por un script propio que
+          corre en cada despliegue, paleta de gráficos validada bajo daltonismo,
+          tablero que se maneja entero con teclado y tabla alternativa bajo cada
+          gráfico. Todo comprobable, ninguna promesa.
+        </p>
+        <span class="donde">flowyn · Panel de divisas · Gestor</span>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= CIERRE ================= -->
+<footer id="contacto" class="cierre" aria-labelledby="t-cierre">
+  <div class="rotulo"><span>Contacto</span><span>Madrid · 2026</span></div>
+  <h2 id="t-cierre">Ya sabes cómo trabajo. Hablemos.</h2>
+  <p class="aclaracion">
+    Escríbeme y abrimos el que quieras: la arquitectura, las decisiones y por qué
+    cada pieza está donde está. Contesto el mismo día.
+  </p>
+
+  <div class="contacto">
+    <a class="principal" href="mailto:danielbuitragodev@outlook.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg> danielbuitragodev@outlook.com</a>
+    <a href="tel:+34604946432"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2.2 1.4a12.5 12.5 0 0 0 5.8 5.8L16 12l4 1.5v3a2 2 0 0 1-2.2 2C10.4 17.8 6.2 13.6 4.5 5.2A2 2 0 0 1 6.5 3Z"/></svg> +34 604 946 432</a>
+    <a href="https://www.linkedin.com/in/danielbuitragodev/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10.5" r="2.2"/><path d="M5.6 16.4a3.8 3.8 0 0 1 6.8 0"/><path d="M15 10h4"/><path d="M15 13.5h4"/></svg> LinkedIn</a>
+    <a href="https://github.com/danielbuitragoh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="5.5" r="2.5"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="17.5" cy="10" r="2.5"/><path d="M6.5 8v8"/><path d="M9 5.5h5a3.5 3.5 0 0 1 3.5 3.5v.3"/></svg> GitHub</a>
+    <a href="Daniel-Buitrago-Desarrollador.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="m7.5 10 4.5 4.5L16.5 10"/><path d="M4.5 19.5h15"/></svg> Descargar CV</a>
+  </div>
+
+  <div class="colofon">
+    <span>Daniel Buitrago · 2026</span>
+    <span>Hecho a mano, sin plantilla</span>
+  </div>
+</footer>
+
+<script>
+/* La barra, el índice activo y el conmutador de tema.
+   Tres cosas pequeñas que además son la prueba de que la página está
+   programada y no maquetada: el subrayado sabe en qué sección estás, la
+   barra solo existe cuando hace falta, y el tema se recuerda. */
+(function(){
+  var barra   = document.getElementById('barra');
+  var portada = document.querySelector('.portada');
+  var enlaces = [].slice.call(barra.querySelectorAll('nav a'));
+  var lento   = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  barra.hidden = false;
+
+  /* Mostrar la barra solo cuando la portada ya no se ve. */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){
+      barra.classList.toggle('visible', !e[0].isIntersecting);
+    },{threshold:0}).observe(portada);
+
+    /* Índice activo. Se mira la sección que ocupa la franja central de la
+       pantalla: usar el borde superior hace que el subrayado salte una
+       sección antes de que llegues a ella. */
+    var secciones = enlaces
+      .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+
+    var visibles = new Set();
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if(e.isIntersecting) visibles.add(e.target); else visibles.delete(e.target);
+      });
+      var actual = secciones.filter(function(s){ return visibles.has(s); })[0];
+      enlaces.forEach(function(a){
+        var suya = actual && a.getAttribute('href') === '#' + actual.id;
+        if(suya) a.setAttribute('aria-current','true');
+        else a.removeAttribute('aria-current');
+      });
+    },{rootMargin:'-45% 0px -45% 0px'});
+    secciones.forEach(function(s){ obs.observe(s); });
+  } else {
+    barra.classList.add('visible');
+  }
+
+  /* Tema. Sin elección guardada manda el sistema: no se estampa nada, que
+     es lo que deja funcionar a prefers-color-scheme. */
+  var raiz = document.documentElement;
+  try{
+    var guardado = localStorage.getItem('tema');
+    if(guardado === 'claro' || guardado === 'oscuro'){
+      raiz.setAttribute('data-theme', guardado === 'claro' ? 'light' : 'dark');
+    }
+  }catch(e){ /* almacenamiento bloqueado: se queda el del sistema */ }
+
+  document.getElementById('tema').addEventListener('click', function(){
+    var oscuroAhora = raiz.getAttribute('data-theme')
+      ? raiz.getAttribute('data-theme') === 'dark'
+      : matchMedia('(prefers-color-scheme: dark)').matches;
+    var nuevo = oscuroAhora ? 'light' : 'dark';
+    raiz.setAttribute('data-theme', nuevo);
+    try{ localStorage.setItem('tema', nuevo === 'light' ? 'claro' : 'oscuro'); }catch(e){}
+  });
+
+  /* Desplazamiento suave respetando a quien pidió menos movimiento. */
+  if(lento) document.documentElement.style.scrollBehavior = 'auto';
+})();
+
+/* Aparición al desplazar. Solo se oculta lo que ya está fuera de la primera
+   pantalla al cargar: lo visible no se toca, así que nunca parpadea. */
+(function(){
+  if(!('IntersectionObserver' in window) ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var alto = window.innerHeight;
+  var obs = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.remove('pendiente');
+      e.target.classList.add('entra');
+      obs.unobserve(e.target);
+    });
+  },{threshold:.1,rootMargin:'0px 0px -6%'});
+
+  document.querySelectorAll('.surge').forEach(function(p){
+    if(p.getBoundingClientRect().top > alto){
+      p.classList.add('pendiente');
+      obs.observe(p);
+    }
+  });
+})();
+</script>
+</body>
+</html>
