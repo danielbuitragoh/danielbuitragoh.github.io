@@ -327,6 +327,23 @@ a{color:inherit}
 
 .lamina{margin:0}
 .lamina img{width:100%;height:auto;display:block;border:1px solid var(--linea)}
+/* Marco de navegador. La captura de La Mesa trae su propio fondo crema y,
+   suelta sobre la página, se leía como una imagen pegada y no como un
+   producto funcionando. La barra lleva la dirección real de la demo. */
+.ventana{
+  border:1px solid var(--linea);border-radius:12px;overflow:hidden;background:var(--papel-2);
+  box-shadow:0 26px 50px -30px rgba(0,0,0,.38),0 2px 6px rgba(0,0,0,.05);
+}
+.ventana-barra{
+  display:flex;align-items:center;gap:6px;height:32px;padding:0 13px;
+  border-bottom:1px solid var(--linea);
+}
+.ventana-barra i{width:9px;height:9px;border-radius:50%;background:var(--gris-2);opacity:.45;flex:none}
+.ventana-barra span{
+  margin-left:10px;min-width:0;font-family:var(--dato);font-size:11px;color:var(--gris-2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lamina .ventana img{border:0}
 .lamina figcaption{
   font-family:var(--dato);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gris-2);margin-top:11px;display:flex;justify-content:space-between;gap:12px;
@@ -351,12 +368,25 @@ a{color:inherit}
   text-wrap:balance;
 }
 .metodo .entradilla{color:var(--tinta-neg);max-width:58ch;margin-bottom:clamp(34px,5vh,58px)}
-.principios{list-style:none;display:grid;border-top:1px solid var(--linea)}
-.principios li{
-  display:grid;grid-template-columns:minmax(220px,.85fr) 1.15fr;gap:clamp(18px,3vw,54px);
-  padding:26px 0;border-bottom:1px solid var(--linea);align-items:start;
+/* Cuatro pruebas, no un bloque de texto: cada una lleva su número y una
+   línea divisoria que se ve. La línea sale del color del texto al 20 % en vez
+   de --linea, que sobre el negativo quedaba casi invisible. */
+.principios{
+  --divisoria:color-mix(in srgb,currentColor 20%,transparent);
+  list-style:none;display:grid;border-top:1px solid var(--divisoria);counter-reset:principio;
 }
-.principios h3{font-family:var(--display);font-weight:600;font-size:1.22rem;letter-spacing:-.015em;line-height:1.16}
+.principios li{
+  counter-increment:principio;
+  display:grid;grid-template-columns:clamp(3rem,5vw,4.5rem) minmax(200px,.8fr) 1.2fr;
+  gap:clamp(16px,2.6vw,48px);padding:clamp(28px,4.5vh,44px) 0;
+  border-bottom:1px solid var(--divisoria);align-items:start;
+}
+.principios li::before{
+  content:counter(principio,decimal-leading-zero);
+  font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,2.8vw,2.4rem);
+  line-height:1;letter-spacing:-.03em;color:var(--gris-2);font-variant-numeric:tabular-nums;
+}
+.principios h3{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
 .principios p{color:var(--tinta-neg);font-size:15.5px}
 .principios .donde{
   display:block;font-family:var(--dato);font-size:10px;letter-spacing:.14em;
@@ -370,7 +400,7 @@ a{color:inherit}
   font-size:clamp(2rem,5.6vw,4rem);line-height:1;max-width:17ch;margin:36px 0 16px;
   text-wrap:balance;
 }
-.cierre .aclaracion{color:var(--gris-1);max-width:52ch;margin-bottom:32px}
+.cierre .aclaracion{color:var(--gris-1);max-width:52ch;margin-bottom:32px;text-wrap:pretty}
 .contacto{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:52px}
 .contacto a{
   border:1px solid var(--linea);border-radius:999px;padding:11px 22px;
@@ -476,7 +506,7 @@ a{color:inherit}
   .pieza{grid-template-columns:1fr;gap:28px}
   .pieza--invertida .lamina{order:0}
   .pie-portada{flex-direction:column;align-items:flex-start;gap:26px}
-  .principios li{grid-template-columns:1fr;gap:10px}
+  .principios li{grid-template-columns:1fr;gap:12px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -697,9 +727,12 @@ a{color:inherit}
     </div>
 
     <figure class="lamina">
-      <img src="capturas/la-mesa.webp" width="1100" height="688" loading="lazy" decoding="async"
-           alt="Panel de cocina de La Mesa: los pedidos del día repartidos en cuatro columnas — recibidos, en preparación, listos y entregados — con su importe y su forma de pago." />
-      <figcaption><span>Panel de cocina</span><span>Datos reales, en vivo</span></figcaption>
+      <div class="ventana">
+        <div class="ventana-barra" aria-hidden="true"><i></i><i></i><i></i><span>danielbuitragoh.github.io/la-mesa/panel</span></div>
+        <img src="capturas/la-mesa.webp" width="1100" height="688" loading="lazy" decoding="async"
+             alt="Panel de cocina de La Mesa: los pedidos del día repartidos en cuatro columnas — recibidos, en preparación, listos y entregados — con su importe y su forma de pago." />
+      </div>
+      <figcaption><span>Panel de cocina</span><span>Demo en vivo, sin contraseña</span></figcaption>
     </figure>
   </article>
 
