@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Daniel Buitrago · Desarrollador</title>
-<meta name="description" content="Seis sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
+<meta name="description" content="Siete sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
 <link rel="canonical" href="https://danielbuitragoh.github.io/" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://danielbuitragoh.github.io/" />
 <meta property="og:title" content="Daniel Buitrago · Desarrollador" />
-<meta property="og:description" content="Seis sistemas completos, 105 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
+<meta property="og:description" content="Siete sistemas completos, 105 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
 <meta property="og:image" content="https://danielbuitragoh.github.io/capturas/tarjeta.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -515,14 +515,14 @@ a{color:inherit}
 
   <div class="pie-portada">
     <p class="presentacion">
-      Desarrollador en Madrid. Seis sistemas completos —modelo de datos, permisos,
+      Desarrollador en Madrid. Siete sistemas completos —modelo de datos, permisos,
       API, interfaz, integración continua y despliegue—, con pruebas que corren
       solas en cada cambio y cada decisión técnica documentada.
       <strong>Todo lo que hay aquí se puede abrir, leer y discutir.</strong>
     </p>
 
     <div class="cifras">
-      <p class="cifra"><b>6</b><span>proyectos terminados</span></p>
+      <p class="cifra"><b>7</b><span>proyectos terminados</span></p>
       <p class="cifra"><b>105</b><span>pruebas automáticas</span></p>
       <p class="cifra"><b>3</b><span>demos que puedes tocar</span></p>
     </div>
@@ -578,7 +578,7 @@ a{color:inherit}
         Llevo año y medio sosteniendo tres cosas a la vez: un empleo a jornada
         completa, la carrera de Ingeniería de Sistemas y este portafolio.
         <strong>Ninguna de las tres ha bajado de nivel</strong>, y lo que hay aquí
-        abajo lo demuestra: seis sistemas terminados, no seis experimentos.
+        abajo lo demuestra: siete sistemas terminados, no siete experimentos.
       </p>
     </div>
     <div>
@@ -610,7 +610,7 @@ a{color:inherit}
 
 <!-- ================= TRABAJO ================= -->
 <main id="trabajo" class="trabajo" aria-label="Proyectos">
-  <div class="rotulo"><span>Trabajo</span><span>Seis proyectos terminados</span></div>
+  <div class="rotulo"><span>Trabajo</span><span>Siete proyectos terminados</span></div>
 
   <!-- 01 -->
   <article class="pieza pieza--invertida surge">
@@ -890,6 +890,58 @@ a{color:inherit}
       <figcaption><span>Tablero</span><span>Cinco fases</span></figcaption>
     </figure>
   </article>
+
+  <!-- 07 -->
+  <article class="pieza pieza--invertida surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">07</span><span class="insignia">4 fuentes normalizadas</span></p>
+      <h2 class="titular">bot-ofertas-empleo</h2>
+      <p class="subtitular">
+        Bot de Telegram que unifica cuatro bolsas de empleo remoto —cada una con su
+        propio formato— deduplica entre fuentes y avisa cuando algo encaja. Sin
+        servidor: corre entero en GitHub Actions con cron.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          Un título real trae <code>&amp;</code> o <code>&lt;</code> ("Backend
+          <code>&amp;</code> Infra Engineer") y Telegram usa <code>parse_mode:
+          HTML</code>: sin escapar, el mensaje entero se pierde y el aviso
+          desaparece en silencio, sin ningún error visible. Toda cadena externa
+          —título, empresa, ubicación, salario— pasa ahora por una función de
+          escape antes de construir cualquier mensaje.
+        </p>
+        <p>
+          El cron corre cada 6 horas, no cada 5 minutos: Remotive permite solo 4
+          peticiones diarias y sus datos ya llegan con 24h de retraso deliberado,
+          así que ir más rápido lo bloquearía sin mostrar nada nuevo. Respetar el
+          límite de un tercero cuando nadie te obliga.
+        </p>
+      </div>
+
+      <ul class="herramientas">
+        <li>Node</li><li>TypeScript</li><li>GitHub Actions</li><li>Vitest</li><li>Telegram</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/bot-ofertas-empleo">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <div class="consola">
+        <span class="prompt">$</span> npm run verificar<br>
+        <span class="tenue">tsc --noEmit</span>  <span class="ok">sin errores</span><br><br>
+        <span class="ok">✓</span> escapa "&amp;", "&lt;" y "&gt;" antes de mandar el mensaje<br>
+        <span class="ok">✓</span> reintenta con <code>retry_after</code> si Telegram responde 429<br>
+        <span class="ok">✓</span> <code>/guardar</code> no repite una oferta ya mandada al gestor<br>
+        <span class="ok">✓</span> un fallo leyendo comandos no tumba la búsqueda de ofertas<br><br>
+        <span class="tenue">Vitest — todos los archivos y pruebas en verde</span>
+      </div>
+      <figcaption><span>Salida real</span><span>0 errores de TypeScript</span></figcaption>
+    </figure>
+  </article>
 </main>
 
 <!-- ================= CÓMO TRABAJO ================= -->
@@ -938,7 +990,7 @@ a{color:inherit}
           cambios optimistas que se deshacen solos si el servidor los rechaza. Lo que
           hace que una aplicación se sienta sólida no es el camino bueno, es el otro.
         </p>
-        <span class="donde">frankfurter-ts · Panel de divisas · Gestor</span>
+        <span class="donde">frankfurter-ts · Panel de divisas · Gestor · bot-ofertas-empleo</span>
       </div>
     </li>
     <li>
