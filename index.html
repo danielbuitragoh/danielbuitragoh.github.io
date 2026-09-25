@@ -80,6 +80,16 @@
   --texto:"Instrument Sans",system-ui,sans-serif;
   --dato:"JetBrains Mono",ui-monospace,monospace;
   --margen:clamp(20px,6vw,110px);
+  /* Ancho maximo del contenido en pantallas muy anchas. Sin esto,
+     .quien/.metodo/.cierre no tienen tope de ancho: se estiran al 100%
+     del viewport y, como el padding lateral (--margen) es fijo, el bloque
+     de texto queda pegado al borde izquierdo con un hueco vacio enorme a
+     la derecha en monitores >1400px. El valor no es arbitrario: es el
+     ancho de .relato (1060px, el elemento mas ancho de las tres
+     secciones) mas el --margen maximo a cada lado (110px x2), asi que en
+     pantallas grandes el contenido llena su columna sin dejar hueco
+     residual y sin cambiar nada dentro de cada seccion. */
+  --ancho-max:1280px;
   --curva:cubic-bezier(.22,1,.36,1);
 }
 
@@ -239,7 +249,7 @@ a{color:inherit}
 }
 
 /* ---------- quién soy ---------- */
-.quien{padding:clamp(64px,11vh,130px) var(--margen) clamp(48px,7vh,86px)}
+.quien{padding:clamp(64px,11vh,130px) var(--margen) clamp(48px,7vh,86px);max-width:var(--ancho-max);margin-inline:auto}
 .quien h2{
   font-family:var(--display);font-weight:800;letter-spacing:-.03em;
   font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.03;text-wrap:balance;
@@ -342,7 +352,7 @@ a{color:inherit}
 .consola b{font-weight:500;color:#fff}
 
 /* ---------- cómo trabajo ---------- */
-.metodo{padding:clamp(64px,11vh,130px) var(--margen)}
+.metodo{padding:clamp(64px,11vh,130px) var(--margen);max-width:var(--ancho-max);margin-inline:auto}
 .metodo h2{
   font-family:var(--display);font-weight:800;letter-spacing:-.03em;
   font-size:clamp(1.8rem,4.6vw,3.2rem);line-height:1.03;max-width:22ch;margin:36px 0 8px;
@@ -362,7 +372,7 @@ a{color:inherit}
 }
 
 /* ---------- cierre ---------- */
-.cierre{padding:clamp(58px,10vh,120px) var(--margen)}
+.cierre{padding:clamp(58px,10vh,120px) var(--margen);max-width:var(--ancho-max);margin-inline:auto}
 .cierre h2{
   font-family:var(--display);font-weight:800;letter-spacing:-.03em;
   font-size:clamp(2rem,5.6vw,4rem);line-height:1;max-width:17ch;margin:36px 0 16px;
