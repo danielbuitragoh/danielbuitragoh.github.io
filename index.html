@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://danielbuitragoh.github.io/" />
 <meta property="og:title" content="Daniel Buitrago · Desarrollador" />
-<meta property="og:description" content="Siete sistemas completos, 154 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
+<meta property="og:description" content="Siete sistemas completos, 169 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
 <meta property="og:image" content="https://danielbuitragoh.github.io/capturas/tarjeta.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -551,7 +551,7 @@ a{color:inherit}
 
     <div class="cifras">
       <p class="cifra"><b>7</b><span>proyectos terminados</span></p>
-      <p class="cifra"><b>154</b><span>pruebas automáticas</span></p>
+      <p class="cifra"><b>169</b><span>pruebas automáticas</span></p>
       <p class="cifra"><b>3</b><span>demos que puedes tocar</span></p>
     </div>
   </div>
@@ -908,6 +908,10 @@ a{color:inherit}
       </ul>
 
       <div class="enlaces">
+        <a class="boton" href="https://danielbuitragoh.github.io/gestor-postulaciones/">
+          Abrir el gestor
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
         <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/gestor-postulaciones">Código</a>
       </div>
     </div>
@@ -922,10 +926,10 @@ a{color:inherit}
   <!-- 07 -->
   <article class="pieza pieza--invertida surge">
     <div class="texto">
-      <p class="marca"><span class="numero">07</span><span class="insignia">4 fuentes normalizadas</span></p>
+      <p class="marca"><span class="numero">07</span><span class="insignia">5 fuentes normalizadas</span></p>
       <h2 class="titular">bot-ofertas-empleo</h2>
       <p class="subtitular">
-        Bot de Telegram que unifica cuatro bolsas de empleo remoto —cada una con su
+        Bot de Telegram que unifica cinco bolsas de empleo remoto —cada una con su
         propio formato— deduplica entre fuentes y avisa cuando algo encaja. Sin
         servidor: corre entero en GitHub Actions con cron.
       </p>
@@ -965,7 +969,7 @@ a{color:inherit}
         <span class="ok">✓</span> reintenta con <code>retry_after</code> si Telegram responde 429<br>
         <span class="ok">✓</span> <code>/guardar</code> no repite una oferta ya mandada al gestor<br>
         <span class="ok">✓</span> un fallo leyendo comandos no tumba la búsqueda de ofertas<br><br>
-        <span class="tenue">Vitest — 49 pruebas en 8 archivos, todas en verde</span>
+        <span class="tenue">Vitest — 64 pruebas en 11 archivos, todas en verde</span>
       </div>
       <figcaption><span>Salida real</span><span>0 errores de TypeScript</span></figcaption>
     </figure>
@@ -1000,7 +1004,7 @@ a{color:inherit}
       <h3>Pruebo contra la base de datos de verdad</h3>
       <div>
         <p>
-          <strong>154 pruebas automáticas</strong> que corren en cada cambio. Las de la
+          <strong>169 pruebas automáticas</strong> que corren en cada cambio. Las de la
           API van contra PostgreSQL real y sin dobles: las restricciones que protegen los datos viven
           en la base, y un mock devuelve lo que yo le diga. Y para saber que las
           pruebas sirven, las rompo a propósito y compruebo que se ponen rojas donde
