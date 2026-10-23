@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Daniel Buitrago · Desarrollador</title>
-<meta name="description" content="Siete sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
+<meta name="description" content="Ocho sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
 <link rel="canonical" href="https://danielbuitragoh.github.io/" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://danielbuitragoh.github.io/" />
 <meta property="og:title" content="Daniel Buitrago · Desarrollador" />
-<meta property="og:description" content="Siete sistemas completos, 175 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
+<meta property="og:description" content="Ocho sistemas completos, 288 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
 <meta property="og:image" content="https://danielbuitragoh.github.io/capturas/tarjeta.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -543,16 +543,16 @@ a{color:inherit}
 
   <div class="pie-portada">
     <p class="presentacion">
-      Desarrollador en Madrid. Siete sistemas completos —modelo de datos, permisos,
+      Desarrollador en Madrid. Ocho sistemas completos —modelo de datos, permisos,
       API, interfaz, integración continua y despliegue—, con pruebas que corren
       solas en cada cambio y cada decisión técnica documentada.
       <strong>Todo lo que hay aquí se puede abrir, leer y discutir.</strong>
     </p>
 
     <div class="cifras">
-      <p class="cifra"><b>7</b><span>proyectos terminados</span></p>
-      <p class="cifra"><b>175</b><span>pruebas automáticas</span></p>
-      <p class="cifra"><b>3</b><span>demos que puedes tocar</span></p>
+      <p class="cifra"><b>8</b><span>proyectos terminados</span></p>
+      <p class="cifra"><b>288</b><span>pruebas automáticas</span></p>
+      <p class="cifra"><b>4</b><span>demos que puedes tocar</span></p>
     </div>
   </div>
 </header>
@@ -603,7 +603,7 @@ a{color:inherit}
         Llevo año y medio sosteniendo tres cosas a la vez: un empleo a jornada
         completa, la carrera de Ingeniería de Sistemas y este portafolio.
         <strong>Ninguna de las tres ha bajado de nivel</strong>, y lo que hay aquí
-        abajo lo demuestra: siete sistemas terminados, no siete experimentos.
+        abajo lo demuestra: ocho sistemas terminados, no ocho experimentos.
       </p>
     </div>
     <div>
@@ -635,7 +635,7 @@ a{color:inherit}
 
 <!-- ================= TRABAJO ================= -->
 <main id="trabajo" class="trabajo" aria-label="Proyectos">
-  <div class="rotulo"><span>Trabajo</span><span>Siete proyectos terminados</span></div>
+  <div class="rotulo"><span>Trabajo</span><span>Ocho proyectos terminados</span></div>
 
   <!-- 01 -->
   <article class="pieza pieza--invertida surge">
@@ -974,6 +974,37 @@ a{color:inherit}
       <figcaption><span>Salida real</span><span>0 errores de TypeScript</span></figcaption>
     </figure>
   </article>
+<!-- 08 -->
+<article class="pieza surge">
+<div class="texto">
+<p class="marca"><span class="numero">08</span><span class="insignia">113 pruebas</span></p>
+<h2 class="titular">api-postulaciones-java</h2>
+<p class="subtitular">La misma API reescrita en Java 21 y Spring Boot. Es mi primer proyecto en Java: lo hice para comprobar que lo que sé de backend no depende del lenguaje.</p>
+<div class="decision">
+<span class="etiqueta">La decisión</span>
+<p>Quité a propósito el filtro de usuario de varias consultas para ver qué pruebas lo notaban: se pusieron en rojo 4 pruebas de autorización y las otras 80 siguieron en verde. Con la consulta de borrado sin filtro, un usuario borraba la postulación de otro (204 en lugar de 404).</p>
+<p>Otro hallazgo al escribir las pruebas: el validador de JWT de Spring solo comprueba la caducidad si el token la trae, así que uno firmado con la clave buena pero sin <code>exp</code> valía para siempre. Ahora se exige.</p>
+</div>
+<ul class="herramientas">
+<li>Java 21</li><li>Spring Boot</li><li>PostgreSQL</li><li>Testcontainers</li><li>Docker</li>
+</ul>
+<div class="enlaces">
+<a class="boton" href="https://api-postulaciones-java.onrender.com/docs">Abrir la documentación<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+<a class="boton boton--tenue" href="https://github.com/danielbuitragoh/api-postulaciones-java">Código</a>
+</div>
+</div>
+<figure class="lamina">
+<div class="consola">
+<span class="prompt">$</span> ./mvnw verify <span class="tenue">— con el filtro de usuario quitado a propósito</span><br>
+[ERROR] AutorizacionTests.bNoPuedeBorrarLaPostulacionDeA: Status expected:&lt;404&gt; but was:&lt;204&gt;<br>
+[ERROR] AutorizacionTests.bNoPuedeVerLaPostulacionDeA: Status expected:&lt;404&gt; but was:&lt;200&gt;<br>
+<span class="tenue">Tests run: 84, Failures: 4</span><br><br>
+<span class="prompt">$</span> ./mvnw verify <span class="tenue">— filtro restaurado</span><br>
+<span class="ok">BUILD SUCCESS</span>
+</div>
+<figcaption><span>Salida real del experimento</span><span>Demo gratuita: si está dormida, tarda unos 3 min</span></figcaption>
+</figure>
+</article>
 </main>
 
 <!-- ================= CÓMO TRABAJO ================= -->
