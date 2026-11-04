@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Daniel Buitrago · Desarrollador</title>
-<meta name="description" content="Ocho sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
+<meta name="description" content="Diez sistemas completos con pruebas automáticas, accesibilidad verificada y cada decisión técnica documentada. Node, TypeScript, React y PostgreSQL. Madrid." />
 <link rel="canonical" href="https://danielbuitragoh.github.io/" />
 <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://danielbuitragoh.github.io/" />
 <meta property="og:title" content="Daniel Buitrago · Desarrollador" />
-<meta property="og:description" content="Ocho sistemas completos, 288 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
+<meta property="og:description" content="Diez sistemas completos, 1.791 pruebas automáticas y cada decisión técnica documentada. Desarrollador en Madrid." />
 <meta property="og:image" content="https://danielbuitragoh.github.io/capturas/tarjeta.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -308,6 +308,13 @@ a{color:inherit}
 }
 .decision code{font-family:var(--dato);font-size:13.5px;background:var(--papel-2);padding:1px 5px;border-radius:4px}
 
+/* Autoría y aviso de herramienta no oficial. Texto corrido en gris (5,33:1
+   sobre papel, ya medido arriba); solo la línea de autoría va en tinta. */
+.aviso-proyecto{margin-bottom:24px;max-width:48ch;font-size:14px;line-height:1.55;color:var(--gris-1)}
+.aviso-proyecto p + p{margin-top:8px}
+.aviso-proyecto .autoria{color:var(--tinta)}
+.aviso-proyecto code{font-family:var(--dato);font-size:13px;background:var(--papel-2);padding:1px 5px;border-radius:4px;white-space:nowrap}
+
 .herramientas{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px;list-style:none}
 .herramientas li{
   font-family:var(--dato);font-size:11px;border:1px solid var(--linea);
@@ -543,16 +550,16 @@ a{color:inherit}
 
   <div class="pie-portada">
     <p class="presentacion">
-      Desarrollador en Madrid. Ocho sistemas completos —modelo de datos, permisos,
+      Desarrollador en Madrid. Diez sistemas completos —modelo de datos, permisos,
       API, interfaz, integración continua y despliegue—, con pruebas que corren
       solas en cada cambio y cada decisión técnica documentada.
       <strong>Todo lo que hay aquí se puede abrir, leer y discutir.</strong>
     </p>
 
     <div class="cifras">
-      <p class="cifra"><b>8</b><span>proyectos terminados</span></p>
-      <p class="cifra"><b>288</b><span>pruebas automáticas</span></p>
-      <p class="cifra"><b>4</b><span>demos que puedes tocar</span></p>
+      <p class="cifra"><b>10</b><span>proyectos terminados</span></p>
+      <p class="cifra"><b>1.791</b><span>pruebas automáticas</span></p>
+      <p class="cifra"><b>5</b><span>demos que puedes tocar</span></p>
     </div>
   </div>
 </header>
@@ -603,7 +610,7 @@ a{color:inherit}
         Llevo año y medio sosteniendo tres cosas a la vez: un empleo a jornada
         completa, la carrera de Ingeniería de Sistemas y este portafolio.
         <strong>Ninguna de las tres ha bajado de nivel</strong>, y lo que hay aquí
-        abajo lo demuestra: ocho sistemas terminados, no ocho experimentos.
+        abajo lo demuestra: diez sistemas terminados, no diez experimentos.
       </p>
     </div>
     <div>
@@ -635,12 +642,127 @@ a{color:inherit}
 
 <!-- ================= TRABAJO ================= -->
 <main id="trabajo" class="trabajo" aria-label="Proyectos">
-  <div class="rotulo"><span>Trabajo</span><span>Ocho proyectos terminados</span></div>
+  <div class="rotulo"><span>Trabajo</span><span>Diez proyectos terminados</span></div>
 
   <!-- 01 -->
   <article class="pieza pieza--invertida surge">
     <div class="texto">
-      <p class="marca"><span class="numero">01</span><span class="insignia">En línea</span></p>
+      <p class="marca"><span class="numero">01</span><span class="insignia">1.086 pruebas</span></p>
+      <h2 class="titular">Registro de viajeros</h2>
+      <p class="subtitular">
+        App libre, local-first y cifrada para que un alojamiento pequeño prepare
+        el fichero de SES.Hospedajes: sin servidor, sin cuentas y sin que nadie
+        más tenga los datos de sus huéspedes.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          La ficha del huésped tenía que llegar a recepción sin servidor. El
+          enlace lleva en el fragmento de la URL —el <code>#</code>, que no viaja
+          a ningún servidor— los datos de la reserva y una clave aleatoria de 256
+          bits; el huésped rellena la ficha en su móvil y esta se cifra con esa
+          clave en un código (QR, texto o archivo) que recepción importa.
+          Descarté un servidor de paso, que rompía el «sin servidor», y WebRTC,
+          que necesita señalización.
+        </p>
+        <p>
+          Lo que el documento oficial no aclara no lo invento: queda marcado
+          como <code>PENDIENTE-OFICIAL</code> en el código y listado en el
+          README. Y el fichero no se ha podido probar contra el portal real: el
+          README lo dice y pide contrastar el primero con la plantilla del portal.
+        </p>
+      </div>
+
+      <div class="aviso-proyecto">
+        <p class="autoria">Idea, especificación, revisión y pruebas: Daniel Buitrago. Código generado con Claude Code bajo su dirección.</p>
+        <p>Herramienta no oficial: no está afiliada ni respaldada por el Ministerio del Interior y no envía nada al Ministerio. El fichero lo subes tú al portal SES.Hospedajes, y el establecimiento sigue siendo el responsable de comunicar a tiempo.</p>
+        <p>Demo con datos ficticios. Contraseña de la demo: <code>demo-hostal-2026</code></p>
+      </div>
+
+      <ul class="herramientas">
+        <li>TypeScript</li><li>React 19</li><li>Vite</li><li>PWA sin conexión</li><li>6 idiomas</li><li>Lector de QR</li><li>documentos-es · DNI/NIE/CIF</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton" href="https://danielbuitragoh.github.io/registro-viajeros/">
+          Abrir la demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+        <a class="boton boton--tenue" href="https://danielbuitragoh.github.io/registro-viajeros/presentacion/">Presentación</a>
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/registro-viajeros">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <img src="capturas/registro-viajeros.webp" width="1100" height="876" loading="lazy" decoding="async"
+           alt="Pantalla «Hoy» de Registro de viajeros: atajos para nueva reserva, escanear el QR de un huésped y exportar los partes listos, un aviso de las 24 h con enlace a cada reserva y una tarjeta por reserva con su estado y su siguiente paso." />
+      <figcaption><span>Hoy en recepción · datos ficticios</span><span>703 app · 362 paquete · 21 e2e</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 02 -->
+  <article class="pieza surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">02</span><span class="insignia">417 pruebas</span></p>
+      <h2 class="titular">validador-ses-hospedajes</h2>
+      <p class="subtitular">
+        CLI y librería en Python que valida los ficheros XML de alta masiva de
+        SES.Hospedajes antes de subirlos al portal: 71 reglas, y cada error con
+        su línea, su ruta y el apartado del documento oficial.
+      </p>
+
+      <div class="decision">
+        <span class="etiqueta">La decisión</span>
+        <p>
+          La prueba cruzada ejecuta el código real de registro-viajeros sobre sus
+          datos ficticios y exige que el validador los acepte sin errores; en la
+          CI se regeneran en vivo y se comparan byte a byte. Encontró
+          discrepancias entre ambos, resueltas: la demo exportaba un parte con
+          tres personas y un solo viajero, y como el documento no dice que deba
+          haber un bloque por alojado, aquí es un aviso y no un error.
+        </p>
+        <p>
+          Lo que el documento no define tampoco se inventa: queda como pendiente
+          y produce, como mucho, un aviso. Y los mensajes nunca repiten nombres,
+          documentos ni fechas de nacimiento, así que el informe se puede guardar
+          en los registros de una CI sin exponer datos de huéspedes.
+        </p>
+      </div>
+
+      <div class="aviso-proyecto">
+        <p class="autoria">Idea, especificación, revisión y pruebas: Daniel Buitrago. Código generado con Claude Code bajo su dirección.</p>
+        <p>Herramienta no oficial: no está relacionada con el Ministerio del Interior y no envía nada a ningún sitio. La validación final la hace el portal SES.Hospedajes: un fichero que pasa aquí puede ser rechazado allí.</p>
+      </div>
+
+      <ul class="herramientas">
+        <li>Python 3.12</li><li>defusedxml</li><li>pytest</li><li>mypy --strict</li><li>ruff</li><li>uv</li>
+      </ul>
+
+      <div class="enlaces">
+        <a class="boton boton--tenue" href="https://github.com/danielbuitragoh/validador-ses-hospedajes">Código</a>
+      </div>
+    </div>
+
+    <figure class="lamina">
+      <div class="consola">
+        <span class="prompt">$</span> ses-validar documento.letra.xml<br>
+        <span class="tenue">Tipo: parte de viajeros (§3) · 2 comunicaciones</span><br>
+        <b>[ERROR]</b> línea 29 · …/persona[1]/numeroDocumento<br>
+        La letra de control del NIF no es correcta: debería ser «R».<br>
+        <span class="tenue">Regla documento.letra (Letra de control de NIF y NIE) · §3; §8.5</span><br>
+        Resultado: NO VÁLIDO · 1 error · 0 avisos<br><br>
+        <span class="prompt">$</span> REGISTRO_VIAJEROS=../registro-viajeros uv run pytest<br>
+        <span class="ok">417 passed</span> <span class="tenue">in 1.24s</span>
+      </div>
+      <figcaption><span>Salida real, recortada</span><span>417 pruebas en verde</span></figcaption>
+    </figure>
+  </article>
+
+  <!-- 03 -->
+  <article class="pieza pieza--invertida surge">
+    <div class="texto">
+      <p class="marca"><span class="numero">03</span><span class="insignia">En línea</span></p>
       <h2 class="titular">flowyn · FAE SKIN</h2>
       <p class="subtitular">
         Tienda completa de un producto: catálogo, cuenta, carrito sincronizado
@@ -682,10 +804,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 02 -->
+  <!-- 04 -->
   <article class="pieza surge">
     <div class="texto">
-      <p class="marca"><span class="numero">02</span><span class="insignia">En línea</span></p>
+      <p class="marca"><span class="numero">04</span><span class="insignia">En línea</span></p>
       <h2 class="titular">La Mesa</h2>
       <p class="subtitular">
         Sistema completo de pedidos para un restaurante: app móvil, panel de
@@ -736,10 +858,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 03 -->
+  <!-- 05 -->
   <article class="pieza pieza--invertida surge">
     <div class="texto">
-      <p class="marca"><span class="numero">03</span><span class="insignia">59 pruebas</span></p>
+      <p class="marca"><span class="numero">05</span><span class="insignia">59 pruebas</span></p>
       <h2 class="titular">frankfurter-ts</h2>
       <p class="subtitular">
         Cliente de tipos de cambio para npm: caché que respeta el
@@ -783,10 +905,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 04 -->
+  <!-- 06 -->
   <article class="pieza surge">
     <div class="texto">
-      <p class="marca"><span class="numero">04</span><span class="insignia">Sin servidor</span></p>
+      <p class="marca"><span class="numero">06</span><span class="insignia">Sin servidor</span></p>
       <h2 class="titular">Panel de divisas</h2>
       <p class="subtitular">
         Cinco monedas latinoamericanas frente al euro con datos de 98 bancos
@@ -829,10 +951,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 05 -->
+  <!-- 07 -->
   <article class="pieza pieza--invertida surge">
     <div class="texto">
-      <p class="marca"><span class="numero">05</span><span class="insignia">51 pruebas</span></p>
+      <p class="marca"><span class="numero">07</span><span class="insignia">51 pruebas</span></p>
       <h2 class="titular">API de postulaciones</h2>
       <p class="subtitular">
         API REST con autenticación real, historial completo de cada candidatura y
@@ -878,10 +1000,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 06 -->
+  <!-- 08 -->
   <article class="pieza surge">
     <div class="texto">
-      <p class="marca"><span class="numero">06</span><span class="insignia">Accesible con teclado</span></p>
+      <p class="marca"><span class="numero">08</span><span class="insignia">Accesible con teclado</span></p>
       <h2 class="titular">Gestor de candidaturas</h2>
       <p class="subtitular">
         El tablero que consume esa API: arrastrar y soltar, métricas y estados de
@@ -923,10 +1045,10 @@ a{color:inherit}
     </figure>
   </article>
 
-  <!-- 07 -->
+  <!-- 09 -->
   <article class="pieza pieza--invertida surge">
     <div class="texto">
-      <p class="marca"><span class="numero">07</span><span class="insignia">5 fuentes normalizadas</span></p>
+      <p class="marca"><span class="numero">09</span><span class="insignia">5 fuentes normalizadas</span></p>
       <h2 class="titular">bot-ofertas-empleo</h2>
       <p class="subtitular">
         Bot de Telegram que unifica cinco bolsas de empleo remoto —cada una con su
@@ -974,10 +1096,10 @@ a{color:inherit}
       <figcaption><span>Salida real</span><span>0 errores de TypeScript</span></figcaption>
     </figure>
   </article>
-<!-- 08 -->
+<!-- 10 -->
 <article class="pieza surge">
 <div class="texto">
-<p class="marca"><span class="numero">08</span><span class="insignia">113 pruebas</span></p>
+<p class="marca"><span class="numero">10</span><span class="insignia">113 pruebas</span></p>
 <h2 class="titular">api-postulaciones-java</h2>
 <p class="subtitular">La misma API reescrita en Java 21 y Spring Boot. Es mi primer proyecto en Java: lo hice para comprobar que lo que sé de backend no depende del lenguaje.</p>
 <div class="decision">
@@ -1035,13 +1157,13 @@ a{color:inherit}
       <h3>Pruebo contra la base de datos de verdad</h3>
       <div>
         <p>
-          <strong>175 pruebas automáticas</strong> que corren en cada cambio. Las de la
+          <strong>1.791 pruebas automáticas</strong> que corren en cada cambio. Las de la
           API van contra PostgreSQL real y sin dobles: las restricciones que protegen los datos viven
           en la base, y un mock devuelve lo que yo le diga. Y para saber que las
           pruebas sirven, las rompo a propósito y compruebo que se ponen rojas donde
           deben.
         </p>
-        <span class="donde">API de postulaciones · frankfurter-ts · bot-ofertas-empleo</span>
+        <span class="donde">API de postulaciones · API en Java · frankfurter-ts · bot-ofertas-empleo · Registro de viajeros · validador-ses-hospedajes</span>
       </div>
     </li>
     <li>
