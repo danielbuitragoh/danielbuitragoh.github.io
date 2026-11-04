@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex" />
+<title>Tarjeta para redes · Daniel Buitrago</title>
+<!--
+  Plantilla de la tarjeta que sale al compartir la web (capturas/tarjeta.png,
+  1200×630, la que apuntan og:image y twitter:image).
+
+  NO se edita a mano para cambiar las cifras: los {{marcadores}} los rellena
+  generar.js leyendo la portada de index.html, que es la única fuente de las
+  cifras. Aquí solo se toca el diseño. Cómo regenerarla: README.md de esta carpeta.
+
+  Las tipografías son las mismas de la web (Bricolage Grotesque y JetBrains
+  Mono, las versiones latin que sirve Google Fonts), guardadas en ./fuentes
+  para que el resultado no dependa de la red.
+-->
+<style>
+@font-face{
+  font-family:"Bricolage Grotesque";
+  src:url("fuentes/bricolage-grotesque-latin.woff2") format("woff2");
+  font-weight:200 800;font-stretch:75% 100%;font-display:block;
+}
+@font-face{
+  font-family:"JetBrains Mono";
+  src:url("fuentes/jetbrains-mono-latin.woff2") format("woff2");
+  font-weight:100 800;font-display:block;
+}
+
+/* Los mismos valores que la portada de la web en modo oscuro. */
+:root{
+  --fondo:#0a0a0a;
+  --panel:#0d0d0d;
+  --tinta:#ffffff;
+  --gris:#8a8a85;      /* «Y respondo por cada decisión.» */
+  --gris-dato:#a3a3a3; /* membrete y etiquetas de las cifras */
+  --linea:#222222;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --dato:"JetBrains Mono",ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:630px}
+body{
+  position:relative;overflow:hidden;background:var(--fondo);color:var(--tinta);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* El panel: una lámina un punto más clara que el fondo, con 56 px de aire. */
+.panel{
+  position:absolute;left:110px;top:62px;width:980px;height:510px;
+  background:var(--panel);
+}
+
+.membrete{
+  position:absolute;left:56px;right:56px;top:52px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--dato);font-size:12px;font-weight:400;
+  letter-spacing:.145em;text-transform:uppercase;color:var(--gris-dato);
+}
+
+.tesis{
+  position:absolute;left:56px;top:110px;
+  font-family:var(--display);font-size:64px;font-weight:800;
+  line-height:.95;letter-spacing:-.02em;
+}
+.tesis em{font-style:normal;color:var(--gris)}
+
+.pie{
+  position:absolute;left:56px;right:56px;top:371px;
+  border-top:1px solid var(--linea);padding-top:25px;
+  display:grid;grid-template-columns:repeat(3,233px);
+}
+.cifra b{
+  display:block;font-family:var(--display);font-weight:800;
+  font-size:33px;line-height:1;letter-spacing:-.01em;color:var(--tinta);
+}
+.cifra span{
+  display:block;margin-top:14px;font-family:var(--dato);font-size:12px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--gris-dato);
+}
+</style>
+</head>
+<body>
+  <div class="panel">
+    <div class="membrete"><span>Daniel Buitrago · Desarrollador</span><span>Madrid</span></div>
+
+    <h1 class="tesis">Construyo, pruebo y<br>despliego. <em>Y respondo<br>por cada decisión.</em></h1>
+
+    <div class="pie">
+      <p class="cifra"><b>{{CIFRA_1}}</b><span>{{ETIQUETA_1}}</span></p>
+      <p class="cifra"><b>{{CIFRA_2}}</b><span>{{ETIQUETA_2}}</span></p>
+      <p class="cifra"><b>{{CIFRA_3}}</b><span>{{ETIQUETA_3}}</span></p>
+    </div>
+  </div>
+</body>
+</html>
