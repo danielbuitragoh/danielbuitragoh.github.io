@@ -1,0 +1,15 @@
+{
+  "name": "tarjeta-redes",
+  "private": true,
+  "description": "Genera capturas/tarjeta.png (1200×630) a partir de las cifras de la portada de index.html",
+  "scripts": {
+    "tarjeta": "node generar.js",
+    "comprobar": "node generar.js --comprobar"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
