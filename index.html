@@ -282,6 +282,11 @@ a{color:inherit}
 /* La alternancia se declara pieza a pieza: con nth-child dependería de
    cuántos elementos no-pieza haya antes y se rompe al insertar algo. */
 .pieza--invertida .lamina{order:-1}
+/* Un hijo de rejilla no encoge por debajo de su contenido salvo que se le diga: sin esto, una línea
+   larga de consola (un nombre de prueba de 56 caracteres) ensancha la ficha y toda la página en móvil. */
+.pieza>*{min-width:0}
+/* La raya de cierre no se separa de la palabra que la precede (quedaba sola al principio de una línea). */
+.junto{white-space:nowrap}
 
 .marca{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .numero{font-family:var(--dato);font-size:11px;letter-spacing:.16em;color:var(--gris-2)}
@@ -415,6 +420,7 @@ a{color:inherit}
   transition:border-color .2s var(--curva),color .2s var(--curva);
 }
 .contacto a:hover{border-color:var(--tinta);color:var(--tinta)}
+.contacto a{max-width:100%;overflow-wrap:anywhere}
 .contacto a.principal{background:var(--tinta);border-color:var(--tinta);color:var(--papel);font-weight:500}
 .contacto a.principal:hover{opacity:.84;color:var(--papel);border-color:var(--tinta)}
 .colofon{
@@ -488,7 +494,22 @@ a{color:inherit}
 }
 @media (max-width:700px){
   .barra .firma{display:none}
-  .barra nav{margin-left:0}
+  .barra{gap:8px}
+  .barra nav{margin-left:0;flex:1;min-width:0;gap:0}
+  /* 44 px de alto para el dedo; el enlace conserva su tamaño de letra. */
+  .barra nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 9px}
+  .barra nav a::after{left:9px;right:9px;bottom:8px}
+  .cierre .aclaracion br{display:none}
+}
+/* En un teléfono no caben los cuatro enlaces y «Contacto», el que más importa, quedaba fuera de la
+   pantalla sin ninguna pista de que la barra se podía deslizar. «Quién soy» es la primera sección:
+   se llega subiendo. Se oculta aquí para que los otros tres quepan siempre, hasta en 320 px. */
+@media (max-width:480px){
+  .barra nav a[href="#quien"]{display:none}
+}
+@media (max-width:340px){
+  .barra nav a{padding:0 5px;font-size:13px}
+  .barra nav a::after{left:5px;right:5px}
 }
 
 /* ---------- botones de contacto con icono ---------- */
@@ -551,7 +572,7 @@ a{color:inherit}
   <div class="pie-portada">
     <p class="presentacion">
       Desarrollador en Madrid. Diez sistemas completos —modelo de datos, permisos,
-      API, interfaz, integración continua y despliegue—, con pruebas que corren
+      API, interfaz, integración continua y <span class="junto">despliegue—,</span> con pruebas que corren
       solas en cada cambio y cada decisión técnica documentada.
       <strong>Todo lo que hay aquí se puede abrir, leer y discutir.</strong>
     </p>
